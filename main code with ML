@@ -1,5 +1,5 @@
 from tkinter import *
-from turtle import color
+from turtle import bgcolor, color
 import numpy as np
 import pandas as pd
 # from gui_stuff import *
@@ -107,11 +107,14 @@ def DecisionTree():
 
 
     if (h=='yes'):
-        t1.delete("1.0", END)
-        t1.insert(END, disease[a])
+        result=disease[a]
+        # t1.delete("1.0", END)
+        # t1.insert(END, disease[a])
     else:
-        t1.delete("1.0", END)
-        t1.insert(END, "Not Found")
+        result="Not Found"
+        # t1.delete("1.0", END)
+        # t1.insert(END, "Not Found")
+    t1.config(text=result)
 
 
 def randomforest():
@@ -144,11 +147,14 @@ def randomforest():
             break
 
     if (h=='yes'):
-        t2.delete("1.0", END)
-        t2.insert(END, disease[a])
+        # t2.delete("1.0", END)
+        # t2.insert(END, disease[a])
+        result=disease[a]
     else:
-        t2.delete("1.0", END)
-        t2.insert(END, "Not Found")
+        # t2.delete("1.0", END)
+        # t2.insert(END, "Not Found")
+        result="Not Found"
+    t2.config(text=result)
 
 
 def NaiveBayes():
@@ -179,11 +185,14 @@ def NaiveBayes():
             break
 
     if (h=='yes'):
-        t3.delete("1.0", END)
-        t3.insert(END, disease[a])
+        result=disease[a]
+        # t3.delete("1.0", END)
+        # t3.insert(END, disease[a])
     else:
-        t3.delete("1.0", END)
-        t3.insert(END, "Not Found")
+        # t3.delete("1.0", END)
+        # t3.insert(END, "Not Found")
+        result="Not Found"
+    t3.config(text=result)
 
 # gui_stuff------------------------------------------------------------------------------------
 
@@ -191,7 +200,9 @@ def NaiveBayes():
 default_bg="#0d3b66"
 heading="#fa7960"
 lbl_fg="#F4D35E"
+sympt_bg="F4D35E"
 wht="white"
+btn_clr="#561D25"
 
 default_body_font="Poppins"
 
@@ -210,11 +221,11 @@ body_frame.pack(padx=20,pady=10)
 name_frame=Frame(body_frame,bg=default_bg)
 name_frame.pack(fill="x")
 
-symptoms_frame=Frame(body_frame,bg="red")
+symptoms_frame=Frame(body_frame,bg=default_bg)
 symptoms_frame.pack(fill="x")
 
-algo_frame=Frame(body_frame)
-algo_frame.pack()
+algo_frame=Frame(body_frame,bg=default_bg)
+algo_frame.pack(fill="x")
 
 # entry variables
 Symptom1 = StringVar()
@@ -260,14 +271,17 @@ S5Lb.grid(row=4, column=0, pady=10,padx=50)
 S5Lb.config(font=(default_body_font, 15, "bold"))
 
 
-lrLb = Label(algo_frame, text="DecisionTree", fg=lbl_fg, bg="#003DA5")
-lrLb.grid(row=15, column=0, pady=10,sticky=W)
+lrLb = Label(algo_frame, text="DecisionTree", fg=lbl_fg, bg=default_bg)
+lrLb.grid(row=0, column=0, pady=10,padx=10)
+lrLb.config(font=(default_body_font, 15, "bold"))
 
-destreeLb = Label(algo_frame, text="RandomForest", fg=lbl_fg, bg="#003DA5")
-destreeLb.grid(row=17, column=0, pady=10, sticky=W)
+destreeLb = Label(algo_frame, text="RandomForest", fg=lbl_fg, bg=default_bg)
+destreeLb.grid(row=1, column=0, pady=10,padx=10)
+destreeLb.config(font=(default_body_font, 15, "bold"))
 
-ranfLb = Label(algo_frame, text="NaiveBayes", fg=lbl_fg, bg="#003DA5")
-ranfLb.grid(row=19, column=0, pady=10, sticky=W)
+ranfLb = Label(algo_frame, text="NaiveBayes", fg=lbl_fg, bg=default_bg)
+ranfLb.grid(row=2, column=0, pady=10,padx=10)
+ranfLb.config(font=(default_body_font, 15, "bold"))
 
 # entries
 OPTIONS = sorted(l1)
@@ -278,43 +292,61 @@ NameEn = Entry(name_frame, textvariable=Name,width=25,font=("Poppins",15),border
 NameEn.grid(row=0, column=3)
 
 S1En = OptionMenu(symptoms_frame, Symptom1,*OPTIONS)
-S1En.config(width=30,bg=default_bg,fg=wht,border=0)
+S1En.config(width=30,bg=default_bg,fg=wht,font=(default_body_font,10))
+S1En["highlightthickness"]=0
+S1En["activebackground"] = default_bg
+S1En["activeforeground"]=wht
 S1En.grid(row=0, column=1,padx=10)
 
 S2En = OptionMenu(symptoms_frame, Symptom2,*OPTIONS)
-S2En.config(width=30,bg=default_bg,fg=wht,border=0)
+S2En.config(width=30,bg=default_bg,fg=wht,font=(default_body_font,10))
+S2En["highlightthickness"]=0
+S2En["activebackground"] = default_bg
+S2En["activeforeground"]=wht
 S2En.grid(row=1, column=1,padx=10)
 
 S3En = OptionMenu(symptoms_frame, Symptom3,*OPTIONS)
-S3En.config(width=30,bg=default_bg,fg=wht,border=0)
+S3En.config(width=30,bg=default_bg,fg=wht,font=(default_body_font,10))
+S3En["highlightthickness"]=0
+S3En["activebackground"] = default_bg
+S3En["activeforeground"]=wht
 S3En.grid(row=2, column=1,padx=10)
 
 S4En = OptionMenu(symptoms_frame, Symptom4,*OPTIONS)
-S4En.config(width=30,bg=default_bg,fg=wht,border=0)
+S4En.config(width=30,bg=default_bg,fg=wht,font=(default_body_font,10))
+S4En["highlightthickness"]=0
+S4En["activebackground"] = default_bg
+S4En["activeforeground"]=wht
 S4En.grid(row=3, column=1,padx=10)
 
 S5En = OptionMenu(symptoms_frame, Symptom5,*OPTIONS)
-S5En.config(width=30,bg=default_bg,fg=wht,border=0)
+S5En.config(width=30,bg=default_bg,fg=wht,font=(default_body_font,10))
+S5En["highlightthickness"]=0
+S5En["activebackground"] = default_bg
+S5En["activeforeground"]=wht
 S5En.grid(row=4, column=1,padx=10)
 
 
-dst = Button(algo_frame, text="DecisionTree", command=DecisionTree,bg="#343a40",fg="white")
-dst.grid(row=8, column=3,padx=10)
+dst = Button(algo_frame, text="Show Result",font=(default_body_font,15,"bold"), command=DecisionTree,bg=btn_clr,fg=wht,border=0)
+dst.grid(row=0, column=3,padx=15)
 
-rnf = Button(algo_frame, text="Randomforest", command=randomforest,bg="#495057",fg="white")
-rnf.grid(row=9, column=3,padx=10)
+rnf = Button(algo_frame, text="Show Result",font=(default_body_font,15,"bold") ,command=randomforest,bg=btn_clr,fg=wht,border=0)
+rnf.grid(row=1, column=3,padx=15)
 
-lr = Button(algo_frame, text="NaiveBayes", command=NaiveBayes,bg="#6c757d",fg="white")
-lr.grid(row=10, column=3,padx=10)
+lr = Button(algo_frame, text="Show Result",font=(default_body_font,15,"bold"), command=NaiveBayes,bg=btn_clr,fg=wht,border=0)
+lr.grid(row=2, column=3,padx=15)
 
 #textfileds
-t1 = Text(algo_frame, height=1, width=40,bg="palegreen",fg="black")
-t1.grid(row=15, column=1, padx=10)
+# t1 = Text(algo_frame, height=1, width=40,bg="palegreen",fg="black")
+t1=Label(algo_frame, text="Results are shown here...", fg=lbl_fg, bg=default_bg,font=(default_body_font,10,"bold"))
+t1.grid(row=0, column=1, padx=15)
 
-t2 = Text(algo_frame, height=1, width=40,bg="lightsalmon",fg="black")
-t2.grid(row=17, column=1 , padx=10)
+# t2 = Text(algo_frame, height=1, width=40,bg="lightsalmon",fg="black")
+t2=Label(algo_frame, text="Results are shown here...", fg=lbl_fg, bg=default_bg,font=(default_body_font,10,"bold"))
+t2.grid(row=1, column=1 , padx=15)
 
-t3 = Text(algo_frame, height=1, width=40,bg="lightcoral",fg="black")
-t3.grid(row=19, column=1 , padx=10)
+# t3 = Text(algo_frame, height=1, width=40,bg="lightcoral",fg="black")
+t3=Label(algo_frame, text="Results are shown here...", fg=lbl_fg, bg=default_bg,font=(default_body_font,10,"bold"))
+t3.grid(row=2, column=1 , padx=15)
 
 root.mainloop()
