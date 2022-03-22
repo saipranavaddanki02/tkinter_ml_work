@@ -1,4 +1,5 @@
 from tkinter import *
+from turtle import color
 import numpy as np
 import pandas as pd
 # from gui_stuff import *
@@ -186,9 +187,35 @@ def NaiveBayes():
 
 # gui_stuff------------------------------------------------------------------------------------
 
+#colors and font
+default_bg="#0d3b66"
+heading="#fa7960"
+lbl_fg="#F4D35E"
+wht="white"
+
+default_body_font="Poppins"
+
 root = Tk()
 root.configure(background='#ced4da')
 root.title("Welcome to BATCH-13 4B14 FINAL PROJECT") 
+root.config(bg=default_bg)
+
+#frames
+head_frame=Frame(root,border=0)
+head_frame.pack(pady=(20,10),padx=10)
+
+body_frame=Frame(root)
+body_frame.pack(padx=20,pady=10)
+
+name_frame=Frame(body_frame,bg=default_bg)
+name_frame.pack(fill="x")
+
+symptoms_frame=Frame(body_frame,bg="red")
+symptoms_frame.pack(fill="x")
+
+algo_frame=Frame(body_frame)
+algo_frame.pack()
+
 # entry variables
 Symptom1 = StringVar()
 Symptom1.set(None)
@@ -203,84 +230,91 @@ Symptom5.set(None)
 Name = StringVar()
 
 # Heading
-w2 = Label(root, text="Disease Predictor using Machine Learning", fg="white", bg="#212529", justify='center' , anchor=CENTER)
-w2.config(font=("Times New Roman", 30, "bold"))
-w2.grid(row=1, column=0, columnspan=2, padx=100)
+w2 = Label(head_frame, text="Disease Predictor using Machine Learning", fg=heading,bg=default_bg, justify='center' , anchor=CENTER)
+w2.config(font=("Roboto Condensed", 25, "bold"))
+w2.pack()
 
 # labels
-NameLb = Label(root, text="Name of the Patient", fg="white", bg="#212529")
-NameLb.grid(row=6, column=0, pady=15, sticky=W)
+NameLb = Label(name_frame, text="Name of the Patient", fg=lbl_fg,bg=default_bg)
+NameLb.grid(row=0, column=1, pady=15,padx=(5,20))
+NameLb.config(font=(default_body_font, 20, "bold"))
+
+S1Lb = Label(symptoms_frame, text="Symptom 1", fg=lbl_fg, bg=default_bg)
+S1Lb.grid(row=0, column=0, pady=10,padx=50)
+S1Lb.config(font=(default_body_font, 15, "bold"))
+
+S2Lb = Label(symptoms_frame, text="Symptom 2", fg=lbl_fg, bg=default_bg)
+S2Lb.grid(row=1, column=0, pady=10,padx=50)
+S2Lb.config(font=(default_body_font, 15, "bold"))
+
+S3Lb = Label(symptoms_frame, text="Symptom 3", fg=lbl_fg, bg=default_bg)
+S3Lb.grid(row=2, column=0, pady=10,padx=50)
+S3Lb.config(font=(default_body_font, 15, "bold"))
+
+S4Lb = Label(symptoms_frame, text="Symptom 4", fg=lbl_fg, bg=default_bg)
+S4Lb.grid(row=3, column=0, pady=10,padx=50)
+S4Lb.config(font=(default_body_font, 15, "bold"))
+
+S5Lb = Label(symptoms_frame, text="Symptom 5", fg=lbl_fg, bg=default_bg)
+S5Lb.grid(row=4, column=0, pady=10,padx=50)
+S5Lb.config(font=(default_body_font, 15, "bold"))
 
 
-S1Lb = Label(root, text="Symptom 1", fg="white", bg="black")
-S1Lb.grid(row=7, column=0, pady=10, sticky=W)
-S1Lb.config(font=("Comic Sans MS", 10, "bold"))
-
-S2Lb = Label(root, text="Symptom 2", fg="white", bg="black")
-S2Lb.grid(row=8, column=0, pady=10, sticky=W)
-S2Lb.config(font=("Comic Sans MS", 10, "bold"))
-
-S3Lb = Label(root, text="Symptom 3", fg="white", bg="black")
-S3Lb.grid(row=9, column=0, pady=10, sticky=W)
-S3Lb.config(font=("Comic Sans MS", 10, "bold"))
-
-S4Lb = Label(root, text="Symptom 4", fg="white", bg="black")
-S4Lb.grid(row=10, column=0, pady=10, sticky=W)
-S4Lb.config(font=("Comic Sans MS", 10, "bold"))
-
-S5Lb = Label(root, text="Symptom 5", fg="white", bg="black")
-S5Lb.grid(row=11, column=0, pady=10, sticky=W)
-S5Lb.config(font=("Comic Sans MS", 10, "bold"))
-
-
-lrLb = Label(root, text="DecisionTree", fg="white", bg="#003DA5")
+lrLb = Label(algo_frame, text="DecisionTree", fg=lbl_fg, bg="#003DA5")
 lrLb.grid(row=15, column=0, pady=10,sticky=W)
 
-destreeLb = Label(root, text="RandomForest", fg="white", bg="#003DA5")
+destreeLb = Label(algo_frame, text="RandomForest", fg=lbl_fg, bg="#003DA5")
 destreeLb.grid(row=17, column=0, pady=10, sticky=W)
 
-ranfLb = Label(root, text="NaiveBayes", fg="white", bg="#003DA5")
+ranfLb = Label(algo_frame, text="NaiveBayes", fg=lbl_fg, bg="#003DA5")
 ranfLb.grid(row=19, column=0, pady=10, sticky=W)
 
 # entries
 OPTIONS = sorted(l1)
 
-NameEn = Entry(root, textvariable=Name)
-NameEn.grid(row=6, column=1)
-
-S1En = OptionMenu(root, Symptom1,*OPTIONS)
-S1En.grid(row=7, column=1)
-
-S2En = OptionMenu(root, Symptom2,*OPTIONS)
-S2En.grid(row=8, column=1)
-
-S3En = OptionMenu(root, Symptom3,*OPTIONS)
-S3En.grid(row=9, column=1)
-
-S4En = OptionMenu(root, Symptom4,*OPTIONS)
-S4En.grid(row=10, column=1)
-
-S5En = OptionMenu(root, Symptom5,*OPTIONS)
-S5En.grid(row=11, column=1)
 
 
-dst = Button(root, text="DecisionTree", command=DecisionTree,bg="#343a40",fg="white")
+NameEn = Entry(name_frame, textvariable=Name,width=25,font=("Poppins",15),border=0)
+NameEn.grid(row=0, column=3)
+
+S1En = OptionMenu(symptoms_frame, Symptom1,*OPTIONS)
+S1En.config(width=30,bg=default_bg,fg=wht,border=0)
+S1En.grid(row=0, column=1,padx=10)
+
+S2En = OptionMenu(symptoms_frame, Symptom2,*OPTIONS)
+S2En.config(width=30,bg=default_bg,fg=wht,border=0)
+S2En.grid(row=1, column=1,padx=10)
+
+S3En = OptionMenu(symptoms_frame, Symptom3,*OPTIONS)
+S3En.config(width=30,bg=default_bg,fg=wht,border=0)
+S3En.grid(row=2, column=1,padx=10)
+
+S4En = OptionMenu(symptoms_frame, Symptom4,*OPTIONS)
+S4En.config(width=30,bg=default_bg,fg=wht,border=0)
+S4En.grid(row=3, column=1,padx=10)
+
+S5En = OptionMenu(symptoms_frame, Symptom5,*OPTIONS)
+S5En.config(width=30,bg=default_bg,fg=wht,border=0)
+S5En.grid(row=4, column=1,padx=10)
+
+
+dst = Button(algo_frame, text="DecisionTree", command=DecisionTree,bg="#343a40",fg="white")
 dst.grid(row=8, column=3,padx=10)
 
-rnf = Button(root, text="Randomforest", command=randomforest,bg="#495057",fg="white")
+rnf = Button(algo_frame, text="Randomforest", command=randomforest,bg="#495057",fg="white")
 rnf.grid(row=9, column=3,padx=10)
 
-lr = Button(root, text="NaiveBayes", command=NaiveBayes,bg="#6c757d",fg="white")
+lr = Button(algo_frame, text="NaiveBayes", command=NaiveBayes,bg="#6c757d",fg="white")
 lr.grid(row=10, column=3,padx=10)
 
 #textfileds
-t1 = Text(root, height=1, width=40,bg="palegreen",fg="black")
+t1 = Text(algo_frame, height=1, width=40,bg="palegreen",fg="black")
 t1.grid(row=15, column=1, padx=10)
 
-t2 = Text(root, height=1, width=40,bg="lightsalmon",fg="black")
+t2 = Text(algo_frame, height=1, width=40,bg="lightsalmon",fg="black")
 t2.grid(row=17, column=1 , padx=10)
 
-t3 = Text(root, height=1, width=40,bg="lightcoral",fg="black")
+t3 = Text(algo_frame, height=1, width=40,bg="lightcoral",fg="black")
 t3.grid(row=19, column=1 , padx=10)
 
 root.mainloop()
